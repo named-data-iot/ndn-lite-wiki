@@ -62,7 +62,7 @@ bootstrapped device                               Service Provider
 #### Interest Packet Format
 
   ```
-  Interest Name: /{home_prefix}/SD-ADV/{OwnIdentity}
+  Interest Name: /[home_prefix]/SD-ADV/<own_identity>/<parameters_digest>
   Parameters: A list of services provided by the device/application
   Signature: Not required
   ```
@@ -73,7 +73,7 @@ bootstrapped device                               Service Provider
 
 #### Instructions
 
-  Every node should register a prefix `/{home_prefix}/SD-ADV` after the device being bootstrapped.
+  Every node should register a prefix `/[home_prefix]/SD-ADV` after the device being bootstrapped.
   After receiving the advertisement Interest packet, the receiver will update its cached service table.
 
 ### Service Status Query Packet Format
@@ -81,7 +81,7 @@ bootstrapped device                               Service Provider
 #### Interest Packet Format
 
   ```
-  Interest Name: /{home_prefix}/SD/<TargetIdentity>/QUERY/<Service_ID>
+  Interest Name: /[home_prefix]/SD/<target_identity>/QUERY/<service_id>
   Parameters: Depends on the service
   Signature: Signed by the requester
   ```
@@ -95,7 +95,7 @@ bootstrapped device                               Service Provider
 #### Data Packet Format
 
   ```
-  Name: /{home_prefix}/SD/<TargetIdentity>/QUERY/<Service_ID>
+  Name: /[home_prefix]/SD/<target_identity>/QUERY/<service_id>
   Content: Service Meta Data TLV
   Signature: Signed by TargetIdentity's identity key
   ```
@@ -130,7 +130,7 @@ bootstrapped device                               Service Provider
 #### Interest Packet Format
 
   ```
-  Interest Name: /{home_prefix}/SD/<TargetIdentity>/<Service_ID>/<Command>/...
+  Interest Name: /[home_prefix]/SD/<target_identity>/<service_id>/<command>/...
   Parameters: Depends on the service
   Signature: Signed by the requester (signature type depends on the service)
   ```
