@@ -28,10 +28,11 @@
 
 #### Plan before Dec 3
 - Zhiyi, Tianyuan: Access Control
-  * Should we still need having a **dedicated access controller**, like what Wentao did before with [NDN-ACE](https://named-data.net/publications/techreports/ndn-0036-1-ndn-ace/)? Current boards are powerful enough to derive ECDSA keys. If not, we must re-design the access control part from the bottom.
   * Quick thoughts are: handshakes between producer and consumer
 - Bo: Nordic SDK 802154 Experiments
 - Yanbiao, Edward: Nordic SDK BLE Experiments
+- Access Control Issues
+  * Should we still need having a **dedicated access controller**, like what Wentao did before with [NDN-ACE](https://named-data.net/publications/techreports/ndn-0036-1-ndn-ace/)? Current boards are powerful enough to derive ECDSA keys. If not, we must re-design the access control part from the bottom. 
 
 #### TODOs for Next Meeting
 * Decide which to use over Nordic SDK: BLE or 802154
