@@ -29,7 +29,7 @@
 #### Plan before Dec 3
 - Zhiyi, Tianyuan: Access Control
   Issues:
-  * Should we still need having a ### access controller ###? Current board is powerful enough to derive ECDSA keys. I suggest using namespace under `/home/identity/ac/KEY` and `/home/identity/ac/KDK`
+  * Should we still need having a **access controller**? Current board is powerful enough to derive ECDSA keys. I suggest using namespace under `/home/identity/ac/KEY` and `/home/identity/ac/KDK`
 - Bo: Nordic SDK 802154 Experiments
 - Yanbiao, Edward: Nordic SDK BLE Experiments
 
