@@ -28,8 +28,8 @@
 
 #### Plan before Dec 3
 - Zhiyi, Tianyuan: Access Control
-  Issues:
-  * Should we still need having a **access controller**? Current board is powerful enough to derive ECDSA keys. I suggest using namespace under `/home/identity/ac/KEY` and `/home/identity/ac/KDK`
+  * Should we still need having a **dedicated access controller**, like what Wentao did before with [NDN-ACE](https://named-data.net/publications/techreports/ndn-0036-1-ndn-ace/)? Current boards are powerful enough to derive ECDSA keys. If not, we must re-design the access control part from the bottom.
+  * Quick thoughts are: handshakes between producer and consumer
 - Bo: Nordic SDK 802154 Experiments
 - Yanbiao, Edward: Nordic SDK BLE Experiments
 
