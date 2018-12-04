@@ -1,6 +1,7 @@
 # NDN IOT Working Groups Tracking
 
-#### Current Status
+## Current Status
+
 ##### Zhiyi, Tianyuan, Xinyu (Stack and App Support Development Team)
 - Finished: 
   * NDN Stack
