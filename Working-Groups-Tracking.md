@@ -16,8 +16,11 @@
   * We haven't started working on Application Support Layer
 
 ##### Yanbiao, Edward (BLE Development Team)
-- In progress:
+- Finished:
   * Bootstrapping over BLE
+
+- In progress:
+  * BLE communication module
 
 - TODOs:
   * Some functionality of BLE is still missing because of the hardware and software issues
