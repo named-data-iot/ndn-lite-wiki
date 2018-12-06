@@ -135,7 +135,7 @@ After receiving the EK request Interest, the controller should
   Signature: Signed by controller's identity key
   ```
 
-  EK Response TLV
+  DK Response TLV
 
   ```
   ECDH_Public_Key = TLV_ECDH_PUB_TYPE Length
