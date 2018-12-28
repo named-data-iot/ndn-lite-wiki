@@ -173,7 +173,7 @@ When Data content is supposed to be encrypted, NDN-Lite defines the encrypted co
 
 ```
 Content = ENCRYPTED_CONTENT_TLV Length
-            AC_Key_ID
+            AC_Key_ID AES_IV
             Encrypted_Payload
 
 AC_Key_ID = TLV_NAME_TYPE Length
