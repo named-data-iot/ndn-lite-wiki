@@ -189,6 +189,6 @@ Encrypted_Payload = TLV_ENCRYPTED_PAYLOAD_TYPE Length
 When the consumer receives the Data packet, the consumer should
 
   * check whether it has the corresponding DK or not
-  * if yes, the controller can directly decrypt the content
-  * if no, the controller should try to apply for the key from the controller using NDN-Lite Access Control protocol.
+  * if yes, the consumer can directly decrypt the content
+  * if no, the consumer should try to apply for the key from the controller using NDN-Lite Access Control protocol.
   * after obtaining the DK, the consumer should cache the decryption until the key expires.
