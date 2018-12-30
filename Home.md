@@ -1,12 +1,14 @@
 # NDN-Lite WiKi Document Center
 
+## Overview
+
 * [[Overview]]
 
-NDN-Lite Application Support Protocols:
+## NDN-Lite Application Support Protocols:
 
 * [[Service Discovery]]
 * [[Access Control]]
 
-Others:
+## Authors:
 
-* [[Working Groups Tracking]]
+* [[Authors]]
