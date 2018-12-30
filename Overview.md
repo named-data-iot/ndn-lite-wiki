@@ -15,7 +15,7 @@ The library allows applications to directly integrate supporting functionalities
 
 The following block diagram presents the architecture of the project.
 
-![](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/ndn-iot-framework.pdf)
+![](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/iot-framework.jpg)
 
 
 Features
