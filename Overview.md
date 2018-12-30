@@ -11,11 +11,11 @@ The architecture of NDN-Lite library is independent of the OS and the developmen
 The exposed API makes the library easily pluggable to IoT Software Development Kit (SDK) and IoT Operating Systems, by creating a thin adaptation layer between the platform and the NDN-Lite.
 
 The library was designed to provide more than core NDN network stack.
-The library allows application to directly integrate supporting functionalities including Access Control, Service Discovery, Schematized Trust and so on.
+The library allows applications to directly integrate supporting functionalities including Access Control, Service Discovery, Schematized Trust and so on.
 
 The following block diagram presents the architecture of the project.
 
-
+![](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/ndn-iot-framework.pdf)
 
 
 Features
@@ -32,7 +32,7 @@ NDN Layer:
 
 Security:
 * Crypto front end which supports OS/SDK specific crypto back-end implementation.
-* A default pure-software crypto back end using tinycrypto and micro-ecc.
+* A default pure-software crypto backend using tinycrypto and micro-ecc.
 * Interest and Data signing and verification.
 * AES Encrypted Content TLV for Data packet.
 
@@ -56,19 +56,19 @@ git clone https://github.com/Zhiyi-Zhang/ndn_standalone.git
 
 #### 2. Select the adaptation layer and network face implementation that can work with your project's platform.
 
-**Warning**: You are only supposed to use the adaptation layer that is designed for your platform and the face implementation(s) that can work with your platform. Using incompatible adaptation and faces will lead to compilation failure.
+**Warning**: You are only supposed to use the adaptation layer that is designed for your platform and the face implementation(s) that can work with your platform. Using incompatible adaptation and faces will lead to compilation failures.
 
 If there is no existing adaptation layer and faces for your current development platform, you can easily create a new adaptation layer with your customized face implementation following the instructions described in later sections.
 
-#### 3. (Optional) Select the security back end that can work with your project's platform.
+#### 3. (Optional) Select the security backend that can work with your project's platform.
 
-You can config which security/crypto back end to use by defining the macro value to be 1 with compiler's c flags.
+You can config which security/crypto backend to use by defining the macro value to be 1 with compiler's c flags.
 You can check `./security/config.h` for details.
-By default, you can use the software back end provided by NDN-Lite.
+By default, you can use the software backend provided by NDN-Lite.
 
 However, to achieve the best performance, it is recommended to use the platform-specific back end.
 
-If there is no existing back end for your current development platform, you can easily create a new back end following the instructions described in later sections.
+If there is no existing backend for your current development platform, you can easily create a new backend following the instructions described in later sections.
 
 #### 4. Add source files and headers into your IoT project's Makefile or equivalent.
 An example would be:
@@ -91,7 +91,7 @@ CFLAGS += -I/path/to/ndn-lite
 Creating an Adaptation Layer with a Face for a New Platform
 ---------------------------------------------
 
-To create a Face implementation based on platform-specific network API, one need to create an adaptation layer.
+To create a Face implementation based on platform-specific network API, one needs to create an adaptation layer.
 
 #### Step One
 * Under the `./adaptation` directory, create a new folder with the name that can reflect the platform.
@@ -111,7 +111,7 @@ Existing examples:
 Creating an NDN Security Back End for a New Platform
 ---------------------------------------------
 
-To create a new security/crypto back end for a OS/SDK platform, please follow the steps.
+To create a new security/crypto backend for an OS/SDK platform, please follow the steps.
 
 #### Step One
 * Under the `./adaptation` directory, create a new folder with the name that can reflect the platform.
@@ -127,4 +127,4 @@ Of course, you don't need to create a new directory if the adaptation for the pl
 
 #### Step Three
 
-In the `./security/config.h` file, create a new macro for your back end and config the included files.
+In the `./security/config.h` file, create a new macro for your backend and config the included files.
