@@ -37,6 +37,7 @@ Security:
 * AES Encrypted Content TLV for Data packet.
 
 Application Layer:
+* Bootstrapping
 * Access Control
 * Service Discovery
 
