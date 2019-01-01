@@ -36,14 +36,24 @@ Security:
 * Interest and Data signing and verification.
 * AES Encrypted Content TLV for Data packet.
 
-Application Layer:
-* Bootstrapping
-* Access Control
-* Service Discovery
+Application Support Layer:
+* Ease-of-use Security Bootstrapping Module to achieve efficient and secured trust anchor installation and identity certificate issuance.
+* Lightweight Name-based Access Control to provide data confidentiality and control of access to data. Check the protocol details at [here](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/Access-Control)
+* Lightweight Service Discovery Protocol Module to enable an application provide services to the network or utilize existing services in the network system. Check the protocol details at [here](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/Service-Discovery)
 
 Platform Adaptation:
 * Nordic NRF 802154 Raw Driver Adaptation, including an adaptation layer and a face implementation called `ndn-nrf-802154-face`.
 * Nordic SDK adaptation, including an adaptation layer and a face implementation called `ndn-nrf-ble-face`.
+
+Code Base Structure
+-----------------
+
+* `./encode` directory: NDN packet encoding and decoding.
+* `./forwarder` directory: NDN lightweight forwarder implementation and Network Face abstraction.
+* `./face` directory: The implementation of network face and application face. Each face instance may require the support from the hardware/OS adaptation
+* `./security` directory: Security support.
+* `./app-support` directory: Access Control, Service Discovery, and other high-level modules that can facilitate application development.
+* `./adaptation` directory: Hardware/OS adaptation. When using NDN-Lite, developers are supposed to select one or more adaptations for the platform/OS they are using for their application development.
 
 
 Instructions
