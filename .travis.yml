@@ -1,0 +1,15 @@
+script:
+- |-
+  git config user.name "<zhiyi-zhang>"
+  git config user.email "<zhiyi@cs.ucla.edu>"
+  git remote remove origin
+  git remote add origin https://$GITHUB_API_KEY@github.com/named-data-iot/ndn-lite-wiki.git > /dev/null 2>&1
+  git remote add upstream https://$GITHUB_API_KEY@github.com/named-data-iot/ndn-lite.wiki.git > /dev/null 2>&1
+  git fetch origin
+  git fetch upstream
+  git merge upstream/master --no-edit
+  git push origin HEAD:master > /dev/null 2>&1
+  git push upstream HEAD:master > /dev/null 2>&1
+env:
+  matrix:
+    secure: CjPFuaHbji4NUsGxj4EWAp26H4gWa2zHE+TfqHpb6k8Y9QvY1Nbz3VUd58O5k0ITNltwJrfYccU6V49IE9usmugwCYtqebhJboVnTS9t0JVakY6BclQhbOAow0DzO1Vz75+dQxUjwXwETiPiJbt10q6nfjxfbbTpN1N3GfNqTkvrvEb5KsitzWrZRjK9C1btGkpowgrfMHHi2+Ds4PHuCaVrBDO/X6cz6fggN64gSoPhg2oHX666l18umVmp0W4wVMgT8WjJpfOpJYtIIuM+JoT0YefUiFodeil73ualON1taLGXeUjDRuR+8HTDWy2qlqjwZb1+sC2mNMm2v9PrePexeb/18eCGHhCZBkl4sKfXCnD9EKpdebEFQkS60xHb8kPzzWfQqbKCnatqSZkN4ArB0soUzHk9AwCkgX75xJjixPheqazcOw/Ztj/y0cUDXdDONTOgYq2oCJBGy8VZOF5Lugvey9CXOfqlJ+ZPBXfIm6OPpHba6CNgoTtMPjBe5TKpDmoEXXXGfpLFeuJ5dj/RavNdZJ6dM17RFjAGwbBCgR3fL14AQGQq/cT9O4rmdQ6aDjBTCTrsfgXlnQYClGy4iE3H+QPSmVfjtfxicaeb3RNRDcbKkKLhBD5pRE6iScxqQYkp8yFkGVeWO8ncTt4AhZBkEWef5IZowUxGQlw=
