@@ -116,5 +116,5 @@ A current quirk of the implementation is that even after the SSP protocol has be
 
 ### iii) Diagram For the BLE States Of NDN-Lite Devices
 
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/NDNLiteBLEStates.png" align="center" height="2504.99" width="800" ></a>
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/NDNLiteBLEStates.png" align="center" height="2191.87" width="700" ></a>
 
