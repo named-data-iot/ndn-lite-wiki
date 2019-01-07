@@ -115,3 +115,20 @@ A current quirk of the implementation is that even after the SSP protocol has be
 
 <a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/NDNLiteBLEStates.png" align="center" height="1878.74" width="600" ></a>
 
+## b) Explaining Design Choices of Current Implementation of SSP over BLe
+
+Many of the parts of the implementation were necessitated by the fact that no Android phones currently support the detection of BLE 5 extended advertisements. As such, a combination of BLE unicast connectivity and BLE 5 extended advertisements was used to allow for the Android phone acting as a controller and constrained devices (e.g., nRF52840 boards) using the NDN-Lite library to communicate.
+
+The main issue here is that BLE 4.2’s "legacy" advertisements can only contain 31 bytes of payload (we have verified this through implementation, and it is also mentioned in many sources such as this one: https://blog.bluetooth.com/exploring-bluetooth5-whats-new-in-advertising).
+
+It would be ideal for an implementation of a multicast NDN face using BLE advertisements to have a larger payload for advertisements; this is exactly a feature that BLE 5 provides, and so that is what is currently used in the implementation of the BLE face in the Ndn-Lite library, so that the devices can send a reasonably large amount of information (currently up to 218 bytes, see here: https://devzone.nordicsemi.com/f/nordic-q-a/41180/maximum-amount-of-data-that-can-be-sent-through-extended-advertisements-nrf52840)  through BLE 5 extended advertisement broadcast to multiple devices simultaneously.
+
+Although fragmentation and reassembly could be used to implement a BLE face using the smaller payload of legacy advertisements, once wider support for BLE 5 is available, it will be helpful to already have an implementation of a BLE multicast face using extended advertising; therefore, the NDN-Lite BLE face uses extended advertising.
+
+However, current support for BLE 5 is inadequate, especially with regards to Android phones. Although several Android phones claim to support BLE 5 and extended advertising (such as the Google Pixel 2, which evaluation was done on), they only offer partial support. For example, we found through experimentation that the Google Pixel 2 can only send extended advertisements, but not detect them. Several other users have had similar issues with other phones: https://devzone.nordicsemi.com/f/nordic-q-a/37885/extended-advertising-with-sdk-15-1-seems-not-to-work
+
+Therefore, currently the implementation on both the controller and device side share BLE connectivity between the BLE faces in their respective implementations, and the sign-on component in their respective implementations (i.e., the SignOnControllerBLE object on the Android side, and the sign-on-basic-client-nrf-sdk-ble object on the device side).
+
+The sharing of BLE connectivity in this way allows for the phone and the boards to communicate with each other in almost all situations, as was described in the previous section.
+
+
