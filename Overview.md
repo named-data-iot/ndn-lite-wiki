@@ -37,9 +37,9 @@ Security:
 * AES Encrypted Content TLV for Data packet.
 
 Application Support Layer:
-* Ease-of-use Security Bootstrapping Module to achieve efficient and secured trust anchor installation and identity certificate issuance.
-* Lightweight Name-based Access Control to provide data confidentiality and control of access to data. Check the protocol details at [here](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/Access-Control)
-* Lightweight Service Discovery Protocol Module to enable an application provide services to the network or utilize existing services in the network system. Check the protocol details at [here](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/Service-Discovery)
+* Ease-of-use Security Bootstrapping Module to achieve efficient and secured trust anchor installation and identity certificate issuance. Check the protocol details at [here](https://github.com/named-data-iot/ndn-lite/wiki/Security-Bootstrapping).
+* Lightweight Name-based Access Control to provide data confidentiality and control of access to data. Check the protocol details at [here](https://github.com/named-data-iot/ndn-lite/wiki/Access-Control).
+* Lightweight Service Discovery Protocol Module to enable an application provide services to the network or utilize existing services in the network system. Check the protocol details at [here](https://github.com/named-data-iot/ndn-lite/wiki/Service-Discovery).
 
 Platform Adaptation:
 * Nordic NRF 802154 Raw Driver Adaptation, including an adaptation layer and a face implementation called `ndn-nrf-802154-face`.
