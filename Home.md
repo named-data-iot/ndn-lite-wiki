@@ -12,7 +12,6 @@
 
 * [[Service Discovery]]
 * [[Access Control]]
-* [[Security Bootstrapping]]
 
 ## Authors:
 
