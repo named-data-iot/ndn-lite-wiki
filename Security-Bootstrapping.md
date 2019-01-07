@@ -54,6 +54,7 @@ In order to use SSP over BLE in an application using the NDN-Lite android suppor
 
 The figure below shows the function that can be executed to start the basic SSP controller over BLE currently implemented in the NDN-Lite android support library (for Android devices):
 
+![](https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_1.png)
 
 It is important to note in the above figure that before initializing the basic SSP controller over BLE singleton, the following things should be performed first:
 Initialize the NDN-Lite android support library.
