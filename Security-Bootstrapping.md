@@ -1,5 +1,3 @@
-# ndn-lite-wiki
-ndn-lite wiki
 
 An Overview
 
