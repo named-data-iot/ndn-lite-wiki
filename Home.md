@@ -10,6 +10,7 @@
 
 ## NDN-Lite Application Support Protocols
 
+* [[Security Bootstrapping]]
 * [[Service Discovery]]
 * [[Access Control]]
 
