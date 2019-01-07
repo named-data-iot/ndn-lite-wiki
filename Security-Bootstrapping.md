@@ -64,7 +64,7 @@ It is also important to note that for the SSP protocol to successfully be carrie
 
 This can be done with the function calls shown in the figure below:
 
-
+![](https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_2.png)
 
 As can be seen in the figure above, after the SignOnBasicControllerBLE singleton has been initialized, the addDevicePendingSignOn function should be called with the NDN Certificate of the KS key pair public key, the device identifier, and the secure sign-on code of the device expected to undergo onboarding through the SSP. It should be noted that in the above example the KS key pair public key certificate is created using the raw KS keypair public key (i.e., the minimal amount of bytes needed to represent the key, the same format as that used in the micro-ecc library which can be found here: https://github.com/kmackay/micro-ecc); it is more secure to have the KS public key certificate be signed by some other mutually trusted party, but the example above is mainly used to demonstrate how the API’s for the basic SSP controller on Android can be used.
 
