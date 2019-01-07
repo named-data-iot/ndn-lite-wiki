@@ -36,16 +36,6 @@ The figure below shows the function that can be executed to start the sign-on cl
  
 <a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png" align="center" height="179.80" width="600" ></a>
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
 Calling this function will automatically construct a basic SSP client that uses the nRF SDK library’s BLE library as the transport over which sign-on will occur. All SSP related jobs (initializing a sign-on-basic-client object with the appropriate values) and transport related jobs (initializing the ble stack, doing advertisements to be discovered by controllers) will be handled by this function call.
 
 Detailed documentation of the parameters used to initialize the sign-on object can be found in the header files linked at the beginning of this section, although a brief summary will be given here as well (in the order that the parameters appear):
@@ -65,18 +55,6 @@ The figure below shows the function that can be executed to start the basic SSP 
 
 <a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_1.png" align="center" height="252.30" width="600" ></a>
 
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-
 It is important to note in the above figure that before initializing the basic SSP controller over BLE singleton, the following things should be performed first:
 Initialize the NDN-Lite android support library.
 Initialize the BLEUnicastConnectionMaintainer singleton. If this is not initialized, neither the BLEFace objects nor the SignOnBasicControllerBLE singleton will behave as they should; see the third section of this document for more details.
@@ -86,23 +64,6 @@ It is also important to note that for the SSP protocol to successfully be carrie
 This can be done with the function calls shown in the figure below:
 
 <a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_2.png" align="center" height="380.43" width="600" ></a>
-
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
 
 As can be seen in the figure above, after the SignOnBasicControllerBLE singleton has been initialized, the addDevicePendingSignOn function should be called with the NDN Certificate of the KS key pair public key, the device identifier, and the secure sign-on code of the device expected to undergo onboarding through the SSP. It should be noted that in the above example the KS key pair public key certificate is created using the raw KS keypair public key (i.e., the minimal amount of bytes needed to represent the key, the same format as that used in the micro-ecc library which can be found here: https://github.com/kmackay/micro-ecc); it is more secure to have the KS public key certificate be signed by some other mutually trusted party, but the example above is mainly used to demonstrate how the API’s for the basic SSP controller on Android can be used.
 
