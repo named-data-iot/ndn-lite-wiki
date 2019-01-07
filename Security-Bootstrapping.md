@@ -53,6 +53,9 @@ The figure below shows the function that can be executed to start the sign-on cl
 <br/>
 <br/>
 <br/>
+<br/>
+<br/>
+<br/>
 
 Calling this function will automatically construct a basic SSP client that uses the nRF SDK library’s BLE library as the transport over which sign-on will occur. All SSP related jobs (initializing a sign-on-basic-client object with the appropriate values) and transport related jobs (initializing the ble stack, doing advertisements to be discovered by controllers) will be handled by this function call.
 
