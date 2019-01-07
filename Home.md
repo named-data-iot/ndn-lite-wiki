@@ -1,5 +1,7 @@
 # NDN-Lite WiKi Document Center
 
+<img src="https://zhiyi-zhang.com/images/ndn-lite-logo.jpg" alt="logo" width="500"/>
+
 ## Overview
 
 * [[Overview]]
