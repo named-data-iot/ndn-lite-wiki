@@ -18,7 +18,7 @@ The general goal of the Secure Sign-on Protocol (SSP in short) is to allow a con
 
 Before running the protocol, we assume the device has a piece of confidential information encoded somewhere (such as a QR code or barcode) and has already shared this information with the controller via some out-of-band operation. This information is used to establish the initial trust, so the method of sharing should be secure. This is a common strategy adopted by similar protocols. However, SSP offers stronger protection to the system in case this piece of pre-shared information is somehow revealed (see the sign-on paper linked at the top for more details).
 
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SSPBasicOverview_1.png" align="center" height="389.13" width="410" >
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SSPBasicOverview_1.png" align="center" height="389.13" width="410" ></a>
 
 <br/>
 <br/>
