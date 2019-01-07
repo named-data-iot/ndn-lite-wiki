@@ -44,7 +44,7 @@ In order to use SSP over BLE in an application using the NDN-Lite library for a 
 
 The figure below shows the function that can be executed to start the sign-on client currently implemented in the NDN-Lite library (for the nRF SDK):
  
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png" align="left" height="122.86" width="410" ></a>
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png" align="left" height="179.80" width="600" ></a>
 
 <br/>
 <br/>
