@@ -1,5 +1,4 @@
-
-An Overview
+# An Overview
 
 This document introduces the security bootstrapping support provided to applications in the NDN-Lite library in three parts:
 1) An overview of the secure sign-on protocol, which is the protocol implemented for security bootstrapping. This section aims to give a brief high level summary of the design of the sign-on protocol, which may help one understand the underlying mechanism and implement the same protocol on a different platform if required.
