@@ -106,10 +106,6 @@ The reason being connected to the controller is considered a “stable” state 
 However, when the device is not connected to an Android controller, it will not be able to receive BLE unicast messages from the controller; hence, when the device disconnects from a controller to do extended advertising, it will only be able to detect messages from other boards doing extended advertising.
 That is why the device will resume legacy advertising as soon as it is done doing extended advertising; it wants to return to a stable state with a controller so that it can exchange data with as many other entities as possible (both other boards and an Android controller).
 
-The figure below may help in understanding the above description:
-
-
-
 ### ii) The NDN-Lite Android Support Library's BLE Face and SSP over BLE Controller
 
 The Controller contains a BLEUnicastConnectionManager, which is constantly scanning for devices using the NDN-Lite library, and connecting to them automatically if they are detected. If a device using the NDN-Lite library has initialized either a BLE face or its Basic SSP Client over BLE singleton, it will automatically begin advertising over BLE and will be detectable by an Android device using the NDN-Lite Android Support Library that has initialized its BLEUnicastConnectionManager singleton.
@@ -117,4 +113,8 @@ The Controller contains a BLEUnicastConnectionManager, which is constantly scann
 Using an observer pattern, the SignOnControllerBLE object and any BLEFace objects that have been created can observe the BLEUnicastConnectionManager singleton and be notified of when connectivity has been established to NDN-Lite devices, and also accept BLE related messages from them. Both the BLEUnicastConnectionManager and SignOnControllerBLE objects are singletons to simplify the implementation, but BLEFace objects are not; a new BLEFace object should be created for every device with which BLE connectivity is desired.
 
 A current quirk of the implementation is that even after the SSP protocol has been successfully carried out for a particular device, the SignOnControllerBLE object will still receive all BLE messages received from that device through the BLEUnicastConnectionManager (as will all BLEFace objects that have been created); in the current solution, the SignOnControllerBLE object will simply ignore these messages, as it will try to parse them to check if they are valid SSP messages and ignore them if they are not.
+
+### iii) Diagram For the BLE States Of NDN-Lite Devices
+
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/NDNLiteBLEStates.png" align="center" height="380.43" width="600" ></a>
 
