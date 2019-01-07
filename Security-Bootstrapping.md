@@ -115,7 +115,7 @@ A current quirk of the implementation is that even after the SSP protocol has be
 
 <a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/NDNLiteBLEStates.png" align="center" height="1878.74" width="600" ></a>
 
-## b) Explaining Design Choices of Current Implementation of SSP over BLe
+## b) Explaining Design Choices of Current Implementation of SSP over BLE
 
 Many of the parts of the implementation were necessitated by the fact that no Android phones currently support the detection of BLE 5 extended advertisements. As such, a combination of BLE unicast connectivity and BLE 5 extended advertisements was used to allow for the Android phone acting as a controller and constrained devices (e.g., nRF52840 boards) using the NDN-Lite library to communicate.
 
