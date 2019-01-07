@@ -70,3 +70,51 @@ This can be done with the function calls shown in the figure below:
 As can be seen in the figure above, after the SignOnBasicControllerBLE singleton has been initialized, the addDevicePendingSignOn function should be called with the NDN Certificate of the KS key pair public key, the device identifier, and the secure sign-on code of the device expected to undergo onboarding through the SSP. It should be noted that in the above example the KS key pair public key certificate is created using the raw KS keypair public key (i.e., the minimal amount of bytes needed to represent the key, the same format as that used in the micro-ecc library which can be found here: https://github.com/kmackay/micro-ecc); it is more secure to have the KS public key certificate be signed by some other mutually trusted party, but the example above is mainly used to demonstrate how the API’s for the basic SSP controller on Android can be used.
 
 More details regarding SSP can be found in the paper linked at the top of the page.
+
+# 3) Current Implementation of SSP over BLE
+
+The following section will describe the underlying transport mechanisms of SSP over BLE; this section is mostly for developers who are interested in understanding the underlying mechanisms of the current implementation, and who may want to implement something similar for other platforms.
+
+This section will be split into two parts; the first part will describe the current solution, while the second part will explain why certain design choices were made.
+
+## a) Description of Current Implementation of SSP over BLE
+
+The current transport solution for SSP over BLE is intertwined with the BLE face functionality of the NDN-Lite library; as such, it will be necessary to briefly discuss the current BLE face solution used for the NDN-Lite library. Explanation as to why this is the case is given in the next section.
+
+In the current NDN-Lite BLE face implementation, both BLE 4.2 and BLE 5 are used. The main difference between BLE 4.2 and BLE 5 relevant to this design choice is that BLE 4.2 uses "legacy" advertising, in which the maximum payload is 31 bytes (see https://blog.bluetooth.com/exploring-bluetooth5-whats-new-in-advertising), while BLE 5 can use both "legacy" and "extended" advertising. In "extended" advertising, the theoretical maximum payload is much higher, although in practice on the nRF52840 board the maximum payload is 218 bytes (see https://devzone.nordicsemi.com/f/nordic-q-a/41180/maximum-amount-of-data-that-can-be-sent-through-extended-advertisements-nrf52840), and implementations of BLE 5 on different hardware may differ. As advertisements are the only way to broadcast data in BLE, these advertisement packets are a key part of implementing a multicast face in BLE, as having a larger payload allows for more data to be broadcast without fragmentation and reassembly (this will be addressed more in the next section).
+
+In the current solution, the BLE face of the NDN-Lite library communicates with Android phone based controllers using a BLE unicast connection, while it broadcasts data to other constrained devices using extended advertisements. All of the information exchanged between boards and the controller (whether it be SSP related messages or anything else) is done through a BLE unicast connection, while infrormation exchanged between boards is done through extended advertisements.
+
+The main complication of this system comes from the fact that extended advertisements cannot be done while maintaining a unicast connection, at least on the nRF52840 board (this has been verified through experimentation). However, at the same time, it is desireable to provide an abstraction to users of the NDN-Lite library's BLE face that hides this complication, so that data sent through the NDN-Lite BLE face is sent through both the BLE unicast connection and extended advertising (and thus can be received by both any Android controller the board is maintaining a BLE unicast connection with, and other boards within extended advertisement range).
+
+With the above explanations having been given, what follows is the currently implemented solution to share BLE connectivity in NDN-Lite's BLE face between a BLE unicast connection and BLE 5's extended advertising, in order to allow for an nRF52840 board using the NDN-Lite library to exchange data (both send and receive) with both Android devices and other boards simultaneously.
+
+### i) The NDN-Lite Library's BLE Face and SSP over BLE Client
+
+Devices using the NDN-Lite library can choose to initialize a Basic SSP Client object and / or initialize the BLE face of the Ndn-Lite library. Both of these objects are singletons to simplify implementation. Both of these objects also rely on a backend BLE implementation that handles things like scanning, maintaining unicast connectivity, and transport (sending and receiving information over a unicast connection).
+
+The way that the Basic SSP over BLE client and BLE face work together is essentially as follows: it could be considered that the “stable” state of the device is to be in a unicast connection with an Android controller. If it is not currently in a unicast connection with an Android controller, it is either doing legacy advertisements so that a controller can connect to it if it comes in range, or it is doing extended advertisements.
+
+Whenever a message is sent through the BLE face of the Ndn-Lite library, the BLE face will first try to send the message through a unicast connection with an Android controller. If a unicast connection does not exist, it will simply not send the message through a unicast connection, but if a unicast connection does exist it will send the message through that connection.
+
+After that, if it was connected, the NDN-Lite BLE face will disconnect from the unicast connection it is currently in, and then send the same message it just sent through a unicast connection through extended advertising, so that other boards using the Ndn-Lite library’s BLE face can detect the message as well.
+
+After the BLE face is done sending the message through extended advertising, it will then begin legacy advertising; the expectation here is that the controller will proactively connect to devices advertising an Ndn-Lite related service UUID, so that the device can return to its “stable” state.
+
+The reason being connected to the controller is considered a “stable” state is because this is the state in which the device can receive the most information. If it the device is in a unicast connection, it can still scan for extended advertisements, meaning that if another device sends a message through extended advertising, or an Android controller sends a message through a BLE unicast connection, the device can receive both messages simultaneously.
+
+However, when the device is not connected to an Android controller, it will not be able to receive BLE unicast messages from the controller; hence, when the device disconnects from a controller to do extended advertising, it will only be able to detect messages from other boards doing extended advertising.
+That is why the device will resume legacy advertising as soon as it is done doing extended advertising; it wants to return to a stable state with a controller so that it can exchange data with as many other entities as possible (both other boards and an Android controller).
+
+The figure below may help in understanding the above description:
+
+
+
+### ii) The NDN-Lite Android Support Library's BLE Face and SSP over BLE Controller
+
+The Controller contains a BLEUnicastConnectionManager, which is constantly scanning for devices using the NDN-Lite library, and connecting to them automatically if they are detected. If a device using the NDN-Lite library has initialized either a BLE face or its Basic SSP Client over BLE singleton, it will automatically begin advertising over BLE and will be detectable by an Android device using the NDN-Lite Android Support Library that has initialized its BLEUnicastConnectionManager singleton.
+
+Using an observer pattern, the SignOnControllerBLE object and any BLEFace objects that have been created can observe the BLEUnicastConnectionManager singleton and be notified of when connectivity has been established to NDN-Lite devices, and also accept BLE related messages from them. Both the BLEUnicastConnectionManager and SignOnControllerBLE objects are singletons to simplify the implementation, but BLEFace objects are not; a new BLEFace object should be created for every device with which BLE connectivity is desired.
+
+A current quirk of the implementation is that even after the SSP protocol has been successfully carried out for a particular device, the SignOnControllerBLE object will still receive all BLE messages received from that device through the BLEUnicastConnectionManager (as will all BLEFace objects that have been created); in the current solution, the SignOnControllerBLE object will simply ignore these messages, as it will try to parse them to check if they are valid SSP messages and ignore them if they are not.
+
