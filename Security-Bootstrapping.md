@@ -1,12 +1,6 @@
 # ndn-lite-wiki
 ndn-lite wiki 
 
-<style>
-div.a {
-        text-align: center;
-}
-</style>
-
 An Overview
 
 This document introduces the security bootstrapping support provided to applications in the NDN-Lite library in three parts: 
@@ -24,9 +18,7 @@ The general goal of the Secure Sign-on Protocol (SSP in short) is to allow a con
 
 Before running the protocol, we assume the device has a piece of confidential information encoded somewhere (such as a QR code or barcode) and has already shared this information with the controller via some out-of-band operation. This information is used to establish the initial trust, so the method of sharing should be secure. This is a common strategy adopted by similar protocols. However, SSP offers stronger protection to the system in case this piece of pre-shared information is somehow revealed (see the sign-on paper linked at the top for more details).
 
-<div class="a">
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SSPBasicOverview_1.png" align="left" >
-</div>
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SSPBasicOverview_1.png" align="center" height="389.13" width="410" >
 
 <br/>
 <br/>
@@ -63,7 +55,7 @@ In order to use SSP over BLE in an application using the NDN-Lite library for a 
 
 The figure below shows the function that can be executed to start the sign-on client currently implemented in the NDN-Lite library (for the nRF SDK):
  
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png" align="left" height="179.80" width="600" ></a>
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png" align="center" height="179.80" width="600" ></a>
 
 <br/>
 <br/>
@@ -92,7 +84,7 @@ In order to use SSP over BLE in an application using the NDN-Lite android suppor
 
 The figure below shows the function that can be executed to start the basic SSP controller over BLE currently implemented in the NDN-Lite android support library (for Android devices):
 
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_1.png" align="left" height="252.30" width="600" ></a>
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_1.png" align="center" height="252.30" width="600" ></a>
 
 <br/>
 <br/>
@@ -114,7 +106,7 @@ It is also important to note that for the SSP protocol to successfully be carrie
 
 This can be done with the function calls shown in the figure below:
 
-<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_2.png" align="left" height="380.43" width="600" ></a>
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEController_2.png" align="center" height="380.43" width="600" ></a>
 
 <br/>
 <br/>
