@@ -43,8 +43,16 @@ The implementations for Android and ndn-lite both follow a pattern of having low
 In order to use SSP over BLE in an application using the NDN-Lite library for a constrained device, one only needs to add a call to the program to construct and initialize a sign-on client over BLE singleton.
 
 The figure below shows the function that can be executed to start the sign-on client currently implemented in the NDN-Lite library (for the nRF SDK):
+ 
+<a href="url"><img src="https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png" align="left" height="122.86" width="410" ></a>
 
-![](https://github.com/named-data-iot/ndn-lite-wiki/blob/master/img/SignOnBasicBLEClient_1.png)
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
 
 Calling this function will automatically construct a basic SSP client that uses the nRF SDK library’s BLE library as the transport over which sign-on will occur. All SSP related jobs (initializing a sign-on-basic-client object with the appropriate values) and transport related jobs (initializing the ble stack, doing advertisements to be discovered by controllers) will be handled by this function call.
 
