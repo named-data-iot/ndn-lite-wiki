@@ -55,13 +55,17 @@ The different NDN-Lite security backends currently implemented are listed below.
 
 #### Default Backend
 
-The frontend components implemented by this backend are the AES component, 
-
+The frontend components implemented by this backend are: 
+  * AES Component
+  * SHA Component
+  * HMAC Component
+  * ECC Component
 This backend is a pure software implementation.
 
 #### Nordic SDK NRF Backend
 
-This frontend components implemented by this backend are the RNG component.
+This frontend components implemented by this backend are:
+  * RNG Component
 
 This backend is a pure software implementation.
 
