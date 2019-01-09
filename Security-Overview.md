@@ -6,8 +6,6 @@ The frontend of the NDN-Lite security library is divided into multiple component
 
 Description of the compilation flags that can be used to utilize different security backend implementations within NDN-Lite can be found in the `./security/ndn-lite-sec-config.h` file.
 
-Description of how frontends are mapped to different backends based on the compilation flags referenced above can be found in the "NDN-Lite Security Backend" section.
-
 The NDN-Lite security frontend contains the following components:
 
 #### AES Component
