@@ -60,6 +60,7 @@ The frontend components implemented by this backend are:
   * SHA Component
   * HMAC Component
   * ECC Component
+
 This backend is a pure software implementation.
 
 #### Nordic SDK NRF Backend
