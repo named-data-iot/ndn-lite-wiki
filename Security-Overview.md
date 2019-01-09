@@ -1,8 +1,6 @@
 # NDN-Lite Security Overview
-=================
 
 ## NDN-Lite Security Frontend
-------------
 
 The frontend of the NDN-Lite security library is divided into multiple components, and thus the library supports more flexible implementation. Frontend components of the NDN-Lite library will use different backend implementations depending on the compilation flags used.
 
@@ -18,7 +16,6 @@ The frontend contains the following components:
 
 
 ## NDN-Lite Security Backend
------------
 
 #### Default Backend
 
