@@ -2,7 +2,7 @@
 
 ## NDN-Lite Security Frontend
 
-The frontend of the NDN-Lite security library is divided into multiple components, and thus the library supports more flexible implementation. Frontend components of the NDN-Lite library will use different backend implementations depending on the compilation flags used.
+The frontend of the NDN-Lite security library is divided into multiple components, and thus the library supports flexible implementation. Frontend components of the NDN-Lite library will use different backend implementations depending on the compilation flags used.
 
 Description of the compilation flags that can be used to utilize different security backend implementations within NDN-Lite can be found in the security/ndn-lite-sec-config.h file.
 
