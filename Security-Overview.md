@@ -40,8 +40,8 @@ In brief, NDN-Lite provides random number generation functionality IF a security
 security backend is selected.
 
 The reason that the default security backend does not provide RNG functionality is that RNG number generation is often
-platform specific; therefore, NDN-Lite RNG functionality is only provided in the case that a security backend for
-a specific platform that has RNG functionality is selected (e.g., the NRF CRYPTO backend).
+platform specific; therefore, NDN-Lite RNG functionality is only provided in the case that a security configuration that uses
+a platform-specific security backend that has RNG functionality is selected (e.g., the Nordic SDK NRF Backend contains RNG functionality through the nrf crypto meant for use on Nordic development boards).
 
 ## NDN-Lite Security Backend
 
