@@ -47,9 +47,12 @@ a specific platform that has RNG functionality is selected (e.g., the NRF CRYPTO
 
 ## NDN-Lite Security Backend
 
+The way that NDN-Lite maps security backend implementations to security frontend API's requires that the ***ndn_security_init*** function, declared in `./security/ndn-lite-sec-config.h`, be called.
+
+The different NDN-Lite security backends currently implemented are listed below.
+
 #### Default Backend
 
 A backend that implements all the exposed APIs in the frontend.
 This backend is a pure software implementation.
 
-#### Nordic SDK NRF Backend
