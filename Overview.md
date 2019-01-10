@@ -29,6 +29,20 @@ NDN Layer:
 * Abstract Face that can be inherited by OS/SDK specific adaptations.
 * DirectFace to support app-forwarder communication for single-thread applications.
 * DummyFace for test only.
+* Fragmentation: reuses the [ndn-riot](https://github.com/named-data-iot/ndn-riot) fragmentation header (3 bytes header)
+```
+    0           1           2           3
+    0 1 2  3    8         15           23
+    +-+-+--+----+----------------------+
+    |1|X|MF|Seq#|    Identification    |
+    +-+-+--+----+----------------------+
+ 
+    First bit: header bit, always 1 (indicating the fragmentation header)
+    Second bit: reserved, always 0
+    Third bit: MF bit, 1 indicating the last frame
+    4th to 8th bit: sequence number (5 bits, encoding up to 31)
+    9th to 24th bit: identification (2-byte random number)
+```
 
 Security:
 * Crypto front end which supports OS/SDK specific crypto back-end implementation.
