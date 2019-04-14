@@ -7,8 +7,6 @@ This document introduces the security bootstrapping support provided to applicat
 
 The paper describing the sign-on protocol is still in the process of submission; it will become available via a link here after it has finished the submission process.
 
-***NOTE: The link above does not reflect the final version of the paper, and is only there temporarily until a link to the final version of the paper is available.
-
 # 1) Protocol Overview
 
 The general goal of the Secure Sign-on Protocol (SSP in short) is to allow a constrained device to automatically and securely retrieve a trust anchor certificate as well as an anchor signed certificate from a trusted controller by local means (i.e., without dependency on the cloud or any other third-party trust center). It is expected to be used in home IoT scenarios, where a user may use their smartphone as a controller, and distribute cryptographic credentials to devices in their home through the sign-on protocol.
