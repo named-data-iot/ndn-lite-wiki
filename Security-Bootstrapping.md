@@ -5,7 +5,7 @@ This document introduces the security bootstrapping support provided to applicat
  2) The interfaces for application developers to utilize this feature. This section aims to help those developing applications with the NDN-Lite library.
  3) The current implementation of this protocol over BLE on NRF boards. This section aims to help those who are interested in helping to improve the implementation or as a reference for those who want to better understand the underlying mechanisms of the current implementation of bootstrapping within NDN-Lite.
 
-If you would like to learn more about the sign-on protocol, you can read the original paper here: https://drive.google.com/drive/folders/1JYsbtDlDs6vRmKqGVN4NwHc6n-56udNB?usp=sharing.
+The paper describing the sign-on protocol is still in the process of submission; it will become available via a link here after it has finished the submission process.
 
 ***NOTE: The link above does not reflect the final version of the paper, and is only there temporarily until a link to the final version of the paper is available.
 
