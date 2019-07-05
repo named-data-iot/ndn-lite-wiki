@@ -24,7 +24,7 @@ As shown in the figure, the NDN IoT Access Control is as follow.
   Therefore, we have `EK == DK`.
 
   To obtain the key for the decryptor to decrypt content, a data consumer (called decryptor in NDN-Lite Access Control) will negotiate an `ephemeral key` with the system controller and system controller will encrypt the EK with the ephemeral key and deliver it to the decryptor.
-  The ephemeral key will be negotiated via Elliptic Curve Diffie-Hellman (ECDH), that is, the encryptor first sends a Decryption Key Request Interest containing decryptor's ECDH pub key bits and the controller will check the access control policy and replies the Data packet containing controller's ECDH pub key bits and also encrypted EK.
+  The ephemeral key will be negotiated via Elliptic Curve Diffie-Hellman (ECDH), that is, the decryptor first sends a Decryption Key Request Interest containing decryptor's ECDH pub key bits and the controller will check the access control policy and replies the Data packet containing controller's ECDH pub key bits and also encrypted EK.
   The ephemeral key will be derived through a key derivation function (KDF) and be used to decrypt the EK.
 
 ```
