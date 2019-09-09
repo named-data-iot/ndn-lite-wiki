@@ -36,7 +36,7 @@ NDN Layer:
     +-+-+--+----+----------------------+
     |1|X|MF|Seq#|    Identification    |
     +-+-+--+----+----------------------+
- 
+
     First bit: header bit, always 1 (indicating the fragmentation header)
     Second bit: reserved, always 0
     Third bit: MF bit, 1 indicating the last frame
@@ -64,36 +64,43 @@ Code Base Structure
 
 * `./encode` directory: NDN packet encoding and decoding.
 * `./forwarder` directory: NDN lightweight forwarder implementation and Network Face abstraction.
-* `./face` directory: The implementation of network face and application face. Each face instance may require the support from the hardware/OS adaptation
+* `./face` directory: Dummy face
 * `./security` directory: Security support.
 * `./app-support` directory: Access Control, Service Discovery, and other high-level modules that can facilitate application development.
-* `./adaptation` directory: Hardware/OS adaptation. When using NDN-Lite, developers are supposed to select one or more adaptations for the platform/OS they are using for their application development.
-
+* `./util` directory: Tools used in forwarder.
 
 Instructions
 ------------
+#### Before Starting
+Please check if your platform are already supported by existing packages. If so, those would be helpful to start with and you can jump to Step4
 
-
-#### 1. Download the NDN-Lite into your IoT project
-```
-git clone https://github.com/Zhiyi-Zhang/ndn_standalone.git
-```
-
-#### 2. Select the adaptation layer and network face implementation that can work with your project's platform.
+* [nRF52 package](https://github.com/named-data-iot/ndn-iot-package-over-nordic-sdk)
+* [POSIX package](https://github.com/named-data-iot/ndn-iot-package-over-posix)
+* [esp8266 package (not official)](https://github.com/yoursunny/esp8266ndn)
 
 **Warning**: You are only supposed to use the adaptation layer that is designed for your platform and the face implementation(s) that can work with your platform. Using incompatible adaptation and faces will lead to compilation failures.
 
-If there is no existing adaptation layer and faces for your current development platform, you can easily create a new adaptation layer with your customized face implementation following the instructions described in later sections.
+#### 1. Download the NDN-Lite into your project
+```
+git clone https://github.com/named-data-iot/ndn-lite
+```
 
-#### 3. (Optional) Select the security backend that can work with your project's platform.
+#### 2. Preparation for platform adaptation
+Check what communication technologies (e.g., Unix sockets, 802.15.4, BLE) would be used in your project. They will be adpated to the NDN-Lite face-forwarder system.
 
-You can config which security/crypto backend to use by defining the macro value to be 1 with compiler's c flags.
-You can check `./security/config.h` for details.
-By default, you can use the software backend provided by NDN-Lite.
+Check if you're going to other security-backend to replace default security-backend. Usually platform-specific backend are preferred, to achieve the best performance.
 
-However, to achieve the best performance, it is recommended to use the platform-specific back end.
+**Warning**: NDN-Lite does have default RNG, but it's fake a RNG which always fails. It is highly recommended to use platform-specific RNG replace it.
 
-If there is no existing backend for your current development platform, you can easily create a new backend following the instructions described in later sections.
+#### 3. Create platform adaptation
+Create `./adaptation` folder, in the same directory of `./ndn-lite`, and put face implementation there. You need to implement a new Face structure in the header and source files. Developers need to make sure that the first structure element is an `ndn_face_intf` instance. In the source file, implement the functions defined in the `ndn_face_intf` structure. In the header file, create a construction function to create a face instance or get the face instance if the face is a singleton. The function pointers binding should also be done in this function. APIs are defined in `./ndn-lite/forwarder/face.h`
+
+Inside `./adaptation` folder, create `./security` folder, and put implementation you want to replace corresponding default backend with there. Backend APIs are defined header files in `./ndn-lite/security` (HMAC, ECC, RNG, AES, SHA256). Don't forget to use `register_platform_security_init` to register your backend before security module initialization. Make sure `ndn_security_init` be after `register_platform_security_init`, otherwise your platform backend won't be loaded.
+
+Existing examples:
+* (Recommended) [POSIX Adaptation](https://github.com/named-data-iot/ndn-iot-package-over-posix): Unix Sockets, UDP, and POSIX-RNG backend.
+* Nordic SDK Adaptation with `ndn-nrf-ble-face`: The files under `./adaptation/ndn-nrf-ble-adaptation/` is the adaptation layer and the files `./face/ndn-nrf-ble-face.c`, `./face/ndn-nrf-ble-face.h` are the face implementation.
+* NRF 802154 driver Adaptation with `ndn-nrf-802154-face`: The files under `./adaptation/ndn-nrf-802154-driver/` is the adaptation layer and the files `./face/ndn-nrf-802154-face.c`, `./face/ndn-nrf-802154-face.h` are the face implementation.
 
 #### 4. Add source files and headers into your IoT project's Makefile or equivalent.
 An example would be:
@@ -110,46 +117,4 @@ CFLAGS += -I/path/to/ndn-lite
 ```
 
 #### 5. Compilation
-
-
-
-Creating an Adaptation Layer with a Face for a New Platform
----------------------------------------------
-
-To create a Face implementation based on platform-specific network API, one needs to create an adaptation layer.
-
-#### Step One
-* Under the `./adaptation` directory, create a new folder with the name that can reflect the platform.
-* In the folder, create new header and/or source files to include platform-specific header files and implement your helper functions.
-
-#### Step Two
-* Under the `./face` directory, create a new header file and a new source file for the face (use the face name as the file name, e.g., ndn-nrf-802154-face).
-* Implement a new Face structure in the header and source files. Developers need to make sure that the first structure element is an `ndn_face_intf` instance.
-* In the source file, implement the functions defined in the `ndn_face_intf` structure.
-* In the header file, create a construction function to create a face instance or get the face instance if the face is a singleton. The function pointers binding should also be done in this function.
-
-Existing examples:
-* Nordic SDK Adaptation with `ndn-nrf-ble-face`: The files under `./adaptation/ndn-nrf-ble-adaptation/` is the adaptation layer and the files `./face/ndn-nrf-ble-face.c`, `./face/ndn-nrf-ble-face.h` are the face implementation.
-* NRF 802154 driver Adaptation with `ndn-nrf-802154-face`: The files under `./adaptation/ndn-nrf-802154-driver/` is the adaptation layer and the files `./face/ndn-nrf-802154-face.c`, `./face/ndn-nrf-802154-face.h` are the face implementation.
-
-
-Creating an NDN Security Back End for a New Platform
----------------------------------------------
-
-To create a new security/crypto backend for an OS/SDK platform, please follow the steps.
-
-#### Step One
-* Under the `./adaptation` directory, create a new folder with the name that can reflect the platform.
-Of course, you don't need to create a new directory if the adaptation for the platform already exists.
-* In the folder, create new header and/or source files to include platform-specific header files and implement your helper functions.
-
-#### Step Two
-* Under the `./security` directory, create a new folder with the name can reflect the platform (e.g., `./security/nordic-sdk-crypto-back/`).
-* If you want to use platform-specific APIs for digital signature generation and verification, implement the APIs defined in `./security/sign-verify.h`.
-* If you want to use platform-specific APIs for AES encryption and decryption, implement the APIs defined in `./security/aes.h`.
-* If you want to use platform-specific APIs for randomness, implement the APIs defined in `./security/random.h`.
-
-
-#### Step Three
-
-In the `./security/config.h` file, create a new macro for your backend and config the included files.
+If you're going to use RNG (from your platform backend) in your project, please `-DFEATURE_PERIPH_HWRNG` or do equivalent thing. Otherwise default ECC backend will still do deterministic signing, which is less strong than normal signing.

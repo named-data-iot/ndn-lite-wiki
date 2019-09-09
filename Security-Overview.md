@@ -20,7 +20,7 @@ The header file describing SHA hashing related functionality can be found at `./
 
 In brief, NDN-Lite provides hash generation and verification using SHA algorithms (e.g., SHA256).
 
-#### HMAC Component 
+#### HMAC Component
 
 The header file describing HMAC related functionality can be found at `./security/ndn-lite-hmac.h`.
 
@@ -39,7 +39,7 @@ The header file describing RNG related functionality can be ofund at `./security
 In brief, NDN-Lite provides random number generation functionality IF a security backend other than the default
 security backend is selected.
 
-The reason that the default security backend does not provide RNG functionality is that RNG number generation is often
+To notice, there is a fake RNG default backend which always fails. The reason that the default security backend does not provide real RNG functionality is that RNG number generation is often
 platform specific; therefore, NDN-Lite RNG functionality is only provided in the case that a security configuration that uses
 a platform-specific security backend that has RNG functionality is selected (e.g., the Nordic SDK NRF Backend contains RNG functionality through the nrf crypto meant for use on Nordic development boards).
 
@@ -47,7 +47,7 @@ a platform-specific security backend that has RNG functionality is selected (e.g
 
 The way that NDN-Lite maps security backend implementations to security frontend API's requires that the ***ndn_security_init*** function, declared in `./security/ndn-lite-sec-config.h`, be called.
 
-In brief, NDN-Lite selects security backends for the frontend security API's through compilation flags; see `./security/ndn-lite-sec-config.h` for more details regarding what compilation flags should be used for different security backends. 
+In brief, NDN-Lite selects security backends for the frontend security API's through compilation flags; see `./security/ndn-lite-sec-config.h` for more details regarding what compilation flags should be used for different security backends.
 
 It should be noted that in many cases, multiple backends will be simultaneously used for different security frontends. For example, the NDN_LITE_SEC_BACKEND_NRF_CRYPTO compilation flag indicates that the RNG frontend will use the Nordic SDK NRF Backend, while the rest of the security frontend API's will use the Default Backend. On the other hand, the NDN_LITE_SEC_BACKEND_DEFAULT compilation flag indicates that all frontend API's besides the RNG frontend will use the Default Backend, while frontend RNG will have no backend and should thus not be used.
 
@@ -55,7 +55,7 @@ The different NDN-Lite security backends currently implemented are listed below.
 
 #### Default Backend
 
-The frontend components implemented by this backend are: 
+The frontend components implemented by this backend are:
   * AES Component
   * SHA Component
   * HMAC Component
@@ -69,4 +69,3 @@ This frontend components implemented by this backend are:
   * RNG Component
 
 This backend is a pure software implementation.
-
