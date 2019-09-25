@@ -4,6 +4,52 @@ Overview
 The NDN-Lite library implements the Named Data Networking Stack with the high-level application support functionalities and low-level OS/hardware adaptations for Internet of Things (IoT) scenarios.
 
 
+### NDN-LITE is 
+* Designed to run on **resource constrained devices**
+* A framework for network systems with built-in highly level system modules for security bootstrapping, service discovery, access control, etc.
+* A development platform for IoT application developers
+
+
+### Design Principles
+* A **System framework**
+* Universality for different platforms (that supports **raw C**)
+* With minimal memory overhead and zero dynamic memory allocation
+* Minimal memory and better efficiency
+* Runs application and NDN forwarder within the same process
+* Fit into IoT platforms that only support single thread/process
+
+Relations to Existing NDN Packages
+-----------------------------------
+NDN-LITE is designed to be an **IoT system framework** that can work with all IoT platforms in **raw C**.
+
+With system framework principle in mind, NDN-LITE has ** application support** to take care of bootstrapping, resource discovery, and access control. 
+
+### Differences from NFD + NDN-CXX
+* Designed to be an IoT system framework: bootstrapping, access control, etc.
+* Lightweight forwarder with reduced functionalities: no support of forwarding hint, RIB management, etc.
+* Lightweight encoding/decoding: reduced memory overhead
+    
+#### Differences from NDN-RIOT
+* The original goal to renew/improve NDN-RIOT codebase.
+* Designed not only for RIOT but as a framework that can work with all IoT platforms **(raw C)**
+* Doesn't support multi-process design of forwarder and applications
+
+#### Differences from CCN-LITE
+ * Designed to be an IoT system framework
+
+Where we are now
+-------------------
+
+* High-level support has not been fully realized. Now developers still need to manually configure face and work with Interest/Data
+* Can be adapt to **any platform that supports C**. So far the supported platforms are:
+    * nRF52 boards
+    * Rasberry PIs
+
+* Some system modules are missing now:
+    * Access Control (design outdated), Pub Sub
+ 
+Our team is actively maintaining the codebase and exploring the design and implementation for the remaining issues.
+
 Architecture
 ------------
 
@@ -15,8 +61,53 @@ The library allows applications to directly integrate supporting functionalities
 
 The following block diagram presents the architecture of the project.
 
+
 ![](https://github.com/Zhiyi-Zhang/ndn_standalone/wiki/iot-framework.jpg)
 
+
+### Application Support Component
+* **Boostrapping**: To obtain identity certificate and trust anchor.
+
+* **Service Discovery**: To discover available services around and advertise one's own services.
+
+* **Pub Sub**(in progress): To subscribe to services and publish new content to one's own services.
+
+
+* **Access Control**:To protect data confidentiality and grant access rights to authorized identities. Old version is now removed. New version work in progress.
+
+* **Schematized Trust**: To only execute commands from authorized identities.
+
+
+
+### Network Component
+* **Forwarder**: In the same process as the application. **No memory copy** in packet processing. Content Store is currently not supported given the limited RAM of most IoT deviceS.
+
+* **NDN Packet Encoding**: Interfaces for Interest Data packet encoding/decoding.
+
+* **Face**: Abstract face for network interface. Will be implemented by platform-dependent adaptations
+
+### Utilities Component
+* **Key Storage**: In-memory storage to keep device's identity certificate, trust anchor.
+
+* **Clock**: To provide time support, especially for network timeout. It has two unified interfaces that need to be implemented
+ * ``time()`` to get the time of steady clock
+ * ``delay()`` to sleep for a period of time
+
+* **Message Queue**: An event queue which keeps event from both NDN forwarder and an application. This event queue will be run by a main loop of the program.
+
+* ** Fragmentation**: To fragment/assemble NDN's wire format packets into/from byte chunks to fit link layer MTUs.
+
+* **Crypto Support**: To support crypto, including SHA2 module, AES module, ECC module, HMAC module, and RNG module with default backend.
+
+
+
+
+### Adaptation Component (Platform Dependent)
+* **Face adaptation**: To extend the abstract face to real link layer interfaces supported by different platforms: IEEE 802.15.4, BLE, LoRa.
+
+* **Clock adaptation**: Provide the realization of two unified interfaces
+
+* **Crypto adaptation**: The adaptation is to provide a different realization of crypto modules to achieve stronger security (hardware TPM, hardware RNG) and higher efficiency (hardware ECC signing/verification). This is **optional**. If no crypto adaptation, NDN-LITR's default realization will be used.
 
 Features
 --------
@@ -67,7 +158,7 @@ Code Base Structure
 * `./face` directory: Dummy face
 * `./security` directory: Security support.
 * `./app-support` directory: Access Control, Service Discovery, and other high-level modules that can facilitate application development.
-* `./util` directory: Tools used in forwarder.
+* `./util` directory: Tools used in forwarder, including time and message queue.
 
 Instructions
 ------------
