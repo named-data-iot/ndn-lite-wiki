@@ -143,15 +143,50 @@ Security:
 * Interest and Data signing and verification.
 * AES Encrypted Content TLV for Data packet. (doesn't exist in ndn-cxx)
 
-Code Base Structure
+Codebase and Packages
 -----------------
 
+### NDN-LITE Core Library
 * `./encode` directory: NDN packet encoding and decoding.
 * `./forwarder` directory: NDN lightweight forwarder implementation and Network Face abstraction.
 * `./face` directory: Dummy face
 * `./security` directory: Security support.
 * `./app-support` directory: Access Control, Service Discovery, and other high-level modules that can facilitate application development.
 * `./util` directory: Tools used in forwarder, including time and message queue.
+
+### NDN-LITE Based Packages
+A "complete" package contains NDN-LITE with adaptations. Apatations should provide realization of time, network interfaces defined in core NDN-LITE.
+
+#### Why choose this way?
+Because this "NDN-LITE + Adaptation" structure is to allow NDN-LITE to work with different platforms. In current design, most common functionalities are included in the NDN-LITE core library, and least platform-dependent realization is left to adaptation.
+
+
+#### An Example of a Package: Nordic Package
+* `./adaptation`: Adaptations
+ * `./security`: Nordic-provided `nrf` and `sha256` to replace NDN-LITE default version
+ * `./802154-adaptation`: Construction of NDN-LITE IEEE 802.15.4 face
+ * `./ble-adaptation`: Construction of NDN-LITE Bluetooth Low Energy face
+ * `./uniform-time`: Adapt to Nordic local time support
+* `./ndn-lite`: NDN-LITE core library
+* `./examples`: Applications 
+
+#### Quick View of Current Packages
+##### [nRF52 package](https://github.com/named-data-iot/ndn-iot-package-over-nordic-sdk)
+* NDN-LITE Codebase
+* Face Adaptation
+ * BLE Face
+ * IEEE 802.15.4 Face
+* Crypto Adaptation
+ * RNG Adaptation
+ * SHA Adaptation
+
+##### [POSIX package](https://github.com/named-data-iot/ndn-iot-package-over-posix)
+* NDN-LITE Codebase
+* Face Adaptation
+ * UDP Face
+ * Unix Socket Face
+* Crypto Adaptation
+ * RNG Adaptation
 
 Instructions
 ------------
