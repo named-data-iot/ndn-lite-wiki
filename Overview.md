@@ -107,21 +107,22 @@ The following block diagram presents the architecture of the project.
 
 * **Clock adaptation**: Provide the realization of two unified interfaces
 
-* **Crypto adaptation**: The adaptation is to provide a different realization of crypto modules to achieve stronger security (hardware TPM, hardware RNG) and higher efficiency (hardware ECC signing/verification). This is **optional**. If no crypto adaptation, NDN-LITR's default realization will be used.
+* **Crypto adaptation**: The adaptation is to provide a different realization of crypto modules to achieve stronger security (hardware TPM, hardware RNG) and higher efficiency (hardware ECC signing/verification). This is **optional**. If no crypto adaptation, NDN-LITE's default realization will be used.
 
-Features
+Technical Features
 --------
 
 In the current version, this library implements the following features:
 
 NDN Layer:
-* NDN Encoding Decoding, which is compatible with NDN TLV format 0.3.
-* NDN IoT Forwarder, a lightweight forwarding module implementation for IoT. Will support Content Store in the near future.
+* NDN Encoding Decoding is compatible with NDN TLV format 0.3.
 * Abstract Face that can be inherited by OS/SDK specific adaptations.
 * DirectFace to support app-forwarder communication for single-thread applications.
 * DummyFace for test only.
 * Fragmentation: reuses the [ndn-riot](https://github.com/named-data-iot/ndn-riot) fragmentation header (3 bytes header)
+
 ```
+
     0           1           2           3
     0 1 2  3    8         15           23
     +-+-+--+----+----------------------+
@@ -133,22 +134,14 @@ NDN Layer:
     Third bit: MF bit, 1 indicating the last frame
     4th to 8th bit: sequence number (5 bits, encoding up to 31)
     9th to 24th bit: identification (2-byte random number)
+
 ```
 
 Security:
 * Crypto front end which supports OS/SDK specific crypto back-end implementation.
-* A default pure-software crypto backend using tinycrypto and micro-ecc.
+* A default pure-software crypto backend using tinycrypt and micro-ecc.
 * Interest and Data signing and verification.
-* AES Encrypted Content TLV for Data packet.
-
-Application Support Layer:
-* Ease-of-use Security Bootstrapping Module to achieve efficient and secured trust anchor installation and identity certificate issuance. Check the protocol details at [here](https://github.com/named-data-iot/ndn-lite/wiki/Security-Bootstrapping).
-* Lightweight Name-based Access Control to provide data confidentiality and control of access to data. Check the protocol details at [here](https://github.com/named-data-iot/ndn-lite/wiki/Access-Control).
-* Lightweight Service Discovery Protocol Module to enable an application provide services to the network or utilize existing services in the network system. Check the protocol details at [here](https://github.com/named-data-iot/ndn-lite/wiki/Service-Discovery).
-
-Platform Adaptation:
-* Nordic NRF 802154 Raw Driver Adaptation, including an adaptation layer and a face implementation called `ndn-nrf-802154-face`.
-* Nordic SDK adaptation, including an adaptation layer and a face implementation called `ndn-nrf-ble-face`.
+* AES Encrypted Content TLV for Data packet. (doesn't exist in ndn-cxx)
 
 Code Base Structure
 -----------------
