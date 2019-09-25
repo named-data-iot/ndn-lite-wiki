@@ -22,7 +22,7 @@ Relations to Existing NDN Packages
 -----------------------------------
 NDN-LITE is designed to be an **IoT system framework** that can work with all IoT platforms in **raw C**.
 
-With system framework principle in mind, NDN-LITE has ** application support** to take care of bootstrapping, resource discovery, and access control. 
+With system framework principle in mind, NDN-LITE has **application support** to take care of bootstrapping, resource discovery, and access control. 
 
 ### Differences from NFD + NDN-CXX
 * Designed to be an IoT system framework: bootstrapping, access control, etc.
