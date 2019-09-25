@@ -95,7 +95,7 @@ The following block diagram presents the architecture of the project.
 
 * **Message Queue**: An event queue which keeps event from both NDN forwarder and an application. This event queue will be run by a main loop of the program.
 
-* ** Fragmentation**: To fragment/assemble NDN's wire format packets into/from byte chunks to fit link layer MTUs.
+* **Fragmentation**: To fragment/assemble NDN's wire format packets into/from byte chunks to fit link layer MTUs.
 
 * **Crypto Support**: To support crypto, including SHA2 module, AES module, ECC module, HMAC module, and RNG module with default backend.
 
@@ -163,10 +163,10 @@ Because this "NDN-LITE + Adaptation" structure is to allow NDN-LITE to work with
 
 #### An Example of a Package: Nordic Package
 * `./adaptation`: Adaptations
- * `./security`: Nordic-provided `nrf` and `sha256` to replace NDN-LITE default version
- * `./802154-adaptation`: Construction of NDN-LITE IEEE 802.15.4 face
- * `./ble-adaptation`: Construction of NDN-LITE Bluetooth Low Energy face
- * `./uniform-time`: Adapt to Nordic local time support
+    * `./security`: Nordic-provided `nrf` and `sha256` to replace NDN-LITE default version
+    * `./802154-adaptation`: Construction of NDN-LITE IEEE 802.15.4 face
+    * `./ble-adaptation`: Construction of NDN-LITE Bluetooth Low Energy face
+    * `./uniform-time`: Adapt to Nordic local time support
 * `./ndn-lite`: NDN-LITE core library
 * `./examples`: Applications 
 
@@ -174,19 +174,19 @@ Because this "NDN-LITE + Adaptation" structure is to allow NDN-LITE to work with
 ##### [nRF52 package](https://github.com/named-data-iot/ndn-iot-package-over-nordic-sdk)
 * NDN-LITE Codebase
 * Face Adaptation
- * BLE Face
- * IEEE 802.15.4 Face
+    * BLE Face
+    * IEEE 802.15.4 Face
 * Crypto Adaptation
- * RNG Adaptation
- * SHA Adaptation
+    * RNG Adaptation
+    * SHA Adaptation
 
 ##### [POSIX package](https://github.com/named-data-iot/ndn-iot-package-over-posix)
 * NDN-LITE Codebase
 * Face Adaptation
- * UDP Face
- * Unix Socket Face
+    * UDP Face
+    * Unix Socket Face
 * Crypto Adaptation
- * RNG Adaptation
+    * RNG Adaptation
 
 Instructions
 ------------
