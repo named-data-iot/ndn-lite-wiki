@@ -80,7 +80,7 @@ The following block diagram presents the architecture of the project.
 
 
 ### Network Component
-* **Forwarder**: In the same process as the application. **No memory copy** in packet processing. Content Store is currently not supported given the limited RAM of most IoT deviceS.
+* **Forwarder**: In the same process as the application. **No memory copy** in packet processing. Content Store is currently not supported given the limited RAM of most IoT devices.
 
 * **NDN Packet Encoding**: Interfaces for Interest Data packet encoding/decoding.
 
@@ -187,6 +187,7 @@ Because this "NDN-LITE + Adaptation" structure is to allow NDN-LITE to work with
     * Unix Socket Face
 * Crypto Adaptation
     * RNG Adaptation
+
 
 Instructions
 ------------
