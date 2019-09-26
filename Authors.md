@@ -4,7 +4,7 @@
 
 * Yanbiao Li (lybmath@cs.ucla.edu)
 
-* Tianyuan Yu (royu29@g.ucla.edu )
+* Tianyuan Yu (tianyuan@cs.ucla.edu )
 
 * Edward Lu (edwardzlu98@gmail.com )
 
